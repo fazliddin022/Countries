@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Countries</title>
+    <style type="text/tailwindcss"></style>
+</head>
+<body class="bg-slate-200">
+    <header class="py-[20px] shadow-md">
+        <div class="containers flex items-center justify-between">
+            <h1 class="font-bold text-[25px]">Countries</h1>
+            <div class="flex items-center gap-[30px]">
+                <button class="w-12 h-12 rounded-full border border-red-400 flex items-center justify-center gap-1 hover:bg-red-50 transition">
+                    <span class="text-m text-red-500">0</span>
+                    <i class="fa-solid fa-heart text-red-500 text-lg"></i>
+                </button>
+                <button class="w-12 h-12 rounded-full border border-green-500 flex items-center justify-center gap-1 hover:bg-green-50 transition">
+                    <span class="text-xs text-green-600">0</span>
+                    <i class="fa-solid fa-bookmark text-green-600 text-lg"></i>
+                </button>
+                <button class="w-12 h-12 rounded-full border border-gray-400 flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                    <i class="fa-solid fa-moon text-gray-700 dark:text-black text-lg"></i>
+                </button>
+                <button class="px-5 py-2 rounded-full bg-blue-500 text-white font-medium hover:bg-blue-600 transition">Create</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="py-[40px]">
+            <div class="containers">
+                <div class="flex items-center justify-between">
+                    <input class="border-[1px] w-[200px] p-[10px] rounded-[5px]" type="text" placeholder="Searching...">
+                    <select class="country-select border-[1px] w-[200px] p-[10px] rounded-[5px]">
+                        <option selected value="all">All</option>
+                    </select>
+                </div>
+                <ul class="country-list flex justify-between flex-wrap gap-[20px] mt-10"></ul>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="./js/countries.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>

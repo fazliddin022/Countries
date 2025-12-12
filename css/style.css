@@ -1,6 +1,47 @@
 
+:root {
+    --clr-body: rgb(168, 168, 168);
+    --clr-text: black; 
+    --bg-item: rgb(227, 227, 227);
+    --clr-action: black;
+}
+
+.dark {
+    --clr-body: black;
+    --clr-text: white; 
+    --bg-item: rgba(14 0, 14 0, 14 0, 0.543); 
+    --clr-action: white;
+}
+
+body{
+    background-color: var(--clr-body);
+}
+
 .containers {
     max-width: 1300px;
     margin: 0 auto;
     padding: 0 10px;
+}
+
+.title {
+    color: var(--clr-text);
+}
+
+.btn{
+    color: var(--clr-text);
+}
+
+.country-item {
+    background-color: var(--bg-item);
+    color: var(--clr-text);
+}
+
+.search-input, .country-select{
+    border-color: var(--bg-item);
+    color: var(--clr-text);
+    background-color: var(--clr-body);
+}
+
+.search-input::placeholder{
+    color: var(--clr-text );
 }

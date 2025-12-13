@@ -7,8 +7,30 @@ let elModalWrapper = document.querySelector(".modal-wrapper") // modal-wrapper
 let elModalInner = document.querySelector(".modal-inner") // modal-inner
 let elLoading = document.querySelector(".loading"); // loading
 
+let countries = get("countries") || countriesList
+
+// Storage save started
+
+function set(key, value) {
+    localStorage.setItem(key, typeof value == "object" ? JSON.stringify(value) : value)
+}
+
+function get(key){
+    try{
+        const result = JSON.parse(localStorage.getItem(key))
+        return result
+    }
+    catch{
+        return localStorage.getItem(key)
+    }
+}
+
+set("countries", countries)
+
+// Storage save finished
 
 // Mode started 
+
 function handleModeClick(){
     document.body.classList.toggle("dark")
 }
@@ -36,12 +58,13 @@ function formatPopulation(value){
 
 // select part started
 function renderSelectOptions(arr, list){
+    list.innerHTML = null
     let countryRes = arr.reduce((prevValue, item) => {
         if(!prevValue.includes(item.region)){
             prevValue.push(item.region)
         }
         return prevValue
-    }, [])
+    }, ["All"])
 
     countryRes.forEach(item => {
         let elOption  = document.createElement("option")
@@ -148,8 +171,8 @@ elSearch.addEventListener("input", (event) => {
 function handleLikeBtnClick(id) {
     const findedObj = countries.find(item => item.id == id)
     findedObj.active = !findedObj.active
-    saveToStorage(); 
     renderCountries(countries, elCountryList) 
+    set("countries", countries)
 }
 // header like part start
 elLikeBtn.addEventListener("click", () => {
@@ -165,8 +188,8 @@ elLikeBtn.addEventListener("click", () => {
 function handleSaveBtnClick(id) {
     const found = countries.find(item => item.id == id)
     found.saved = !found.saved
-    saveToStorage(); 
     renderCountries(countries, elCountryList)
+    set("countries", countries)
 }
 // header saved part started
 elSaveBtn.addEventListener("click", () => {
@@ -217,8 +240,8 @@ function handleCancelModal(){
 function handleDeleteModal(id){
     const deleteIndex = countries.findIndex(item => item.id == id)
     countries.splice(deleteIndex, 1)
-    saveToStorage();
     renderCountries(countries, elCountryList)
+    set("countries", countries)
     showModal()
 }
 // Delete part finished
@@ -260,8 +283,9 @@ function handleCreateCountry(){
            `
            setTimeout(() => {
                 countries.push(data)
-                saveToStorage();  
                 renderCountries(countries, elCountryList)
+                renderSelectOptions(countries, elCountrySelect)
+                set("countries", countries)
                 showModal()
             },1000)
         
@@ -270,7 +294,7 @@ function handleCreateCountry(){
 // Create part Finished
 
 
-// Eidit part started
+// Edit part started
 function handleEditBtnClick(id){
     showModal(true)
     const updateData = countries.find(item => item.id == id)
@@ -303,9 +327,9 @@ function handleEditBtnClick(id){
         elUpdateForm.children[1].innerHTML = `
         <img class="scale-[2] mx-auto" src="./images/loading.png" alt="Loading img" width="30" height="30"/>
         `
-        setTimeout(() => {
-            saveToStorage();  
+        setTimeout(() => { 
             renderCountries(countries, elCountryList)
+            set("countries", countries)
             showModal()
         },1000)
         
